@@ -1,33 +1,38 @@
-import Express from "express";
+import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import router from "./routes/FinancialRoute.js";
 import "dotenv/config";
 
-const app = Express();
-const port = process.env.VITE_PORT;
-app.use(cors());
-app.use(Express.json());
+// Initialize Express
+const app = express();
 
+// Load environment variables (uncomment if needed)
+require("dotenv").config();
+
+const port = process.env.PORT || 3000; // Use PORT instead of VITE_PORT
+const dbString = process.env.DB_STRING; // Use DB_STRING instead of VITE_DB_STRING
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Routes
 app.get("/", (req, res) => {
   res.send({ message: "Server is running!!" });
 });
 
 app.use("/finance-record", router);
-// require("dotenv").config();
 
-// const mongoURL =
-//   "mongodb+srv://jayeshjaiswal2510:F7pL2Co2GQZMO9lR@cluster0.grfya.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
-const dbString = process.env.VITE_DB_STRING;
+// MongoDB Connection
 mongoose
-  .connect(dbString)
+  .connect(dbString, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     app.listen(port, () => {
-      console.log(`Server running on port ${port} `);
+      console.log(`Server running on port ${port}`);
     });
-    console.log("Connected with Database");
+    console.log("Connected to the database");
   })
   .catch((error) => {
-    console.log("Database connection Failed ", error);
+    console.error("Database connection failed:", error);
   });
