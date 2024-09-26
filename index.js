@@ -21,9 +21,9 @@ app.get("/", (req, res) => {
   res.send({ message: "Server is running!!" });
 });
 
-// app.listen(4000, () => {
-//   console.log(`Server running smoothing 4000`);
-// });
+app.listen(4000, () => {
+  console.log(`Server running smoothing 4000`);
+});
 
 app.use("/finance-record", router);
 
