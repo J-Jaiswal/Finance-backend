@@ -9,7 +9,7 @@ dotenv.config();
 
 // Initialize Express
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 const dbString = process.env.DB_STRING;
 
 // Middleware
@@ -28,7 +28,7 @@ mongoose
   .connect(dbString)
   .then(() => {
     app.listen(port, () => {
-      console.log(`Server running on port ${port}`);
+      console.log(`Server running smoothing`);
     });
     console.log("Connected to the database");
   })
