@@ -8,6 +8,11 @@ const app = Express();
 const port = process.env.VITE_PORT;
 app.use(cors());
 app.use(Express.json());
+
+app.get("/", (req, res) => {
+  res.send({ message: "Server is running!!" });
+});
+
 app.use("/finance-record", router);
 // require("dotenv").config();
 
