@@ -15,7 +15,7 @@ app.use(express.json());
 app.use("/finance-record", router);
 
 app.listen(port, () => {
-  console.log(`Server running smoothing 4000`);
+  console.log(`Server running smoothly ${port} `);
 });
 
 app.get("/", (req, res) => {
